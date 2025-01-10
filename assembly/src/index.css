@@ -13,12 +13,12 @@ span {
   background-color: #323232;
   border-bottom: 1px solid #F9F4DA;
   margin-right: 10px;
-  text-align: center;
   justify-content: center;
   align-items: center;
   color: #F9F4DA;
   font-weight: 700;
   font-size: 1.125rem;
+  vertical-align: middle;
 }
 button {
   width: 40px;
@@ -31,6 +31,7 @@ button {
   font-weight: 700;
   margin-bottom: 8px;
   cursor: pointer;
+  
 }
 .main {
   width: 600px;

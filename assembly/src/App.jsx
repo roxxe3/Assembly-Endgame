@@ -42,7 +42,32 @@ export default function App() {
       chose={() => checkLeter(letter.value)}
     />
   ));
+  
+  function checkLeter(letter) {
+    setLetterObj(prevLetterObj => {
+      const updatedLetterObj = prevLetterObj.map(obj => updateLetterObject(obj, letter, word));
+      return updatedLetterObj;
+    });
+  }
 
+  function updateLetterObject(obj, letter, word) {
+    if (obj.value === letter) {
+      if (word.includes(letter.toLowerCase())) {
+        updateDisplayedLetters(letter);
+        return {
+          ...obj,
+          isChosen: true
+        };
+      } else {
+        return {
+          ...obj,
+          isFalse: true
+        };
+      }
+    }
+    return obj;
+  }
+  
   function updateDisplayedLetters(letter) {
     const indexes = getCharIndex(letter);
     console.log(indexes);
@@ -55,30 +80,6 @@ export default function App() {
     });
   }
 
-  function checkLeter(letter) {
-    setLetterObj(prevLetterObj => {
-      const updatedLetterObj = prevLetterObj.map(obj => {
-        if (obj.value === letter) {
-          if (word.includes(letter.toLowerCase())) {
-            updateDisplayedLetters(letter)
-            return {
-              ...obj,
-              isChosen: true
-            };
-          } else {
-            return {
-              ...obj,
-              isFalse: true
-            };
-          }
-        } else {
-          return obj;
-        }
-      });
-      console.log(displayedLetters);
-      return updatedLetterObj;
-    });
-  }
 
   const spanEl = displayedLetters.map((letter, index) => (
     <Word key={index} letter={letter} />
