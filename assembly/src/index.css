@@ -1,0 +1,55 @@
+body {
+  background-color: #282726;
+  font-family: "Hanken Grotesk", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hiddenletter {
+  width: 40px;
+  height: 40px;
+}
+span {
+  display: inline-flex;
+  width: 2.25em;
+  height: 2.25em;
+  background-color: #323232;
+  border-bottom: 1px solid #F9F4DA;
+  margin-right: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #F9F4DA;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+button {
+  width: 40px;
+  height: 40px;
+  background-color: #FCBA29;
+  border-radius: 4px;
+  font-family: inherit;
+  border: 1px solid #D7D7D7;
+  color: #1E1E1E;
+  font-weight: 700;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.main {
+  width: 600px;
+  height: 726px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+.letters {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(2, 1fr) repeat();
+  grid-column-gap: 8px;
+  grid-row-gap: 0px;
+  justify-content: center;
+  
+}
