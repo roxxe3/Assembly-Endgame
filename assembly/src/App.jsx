@@ -2,15 +2,24 @@ import Word from "./Word";
 import Letters from "./Letter";
 import { words, lettersArray } from "./words.js";
 import { useState } from "react";
+import { languages } from "./languages.js";
 
 function chooseRandWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
 
+
+
+
 export default function App() {
   const [word, setWord] = useState(chooseRandWord());
   const [letterObj, setLetterObj] = useState(genratLetterObject());
   const [displayedLetters, setDisplayedLetters] = useState(Array(word.length).fill(''));
+  const languagesEl = languages.map(language => <span className="language" key={language.name} style={{backgroundColor: language.backgroundColor,
+    color: language.color
+  }}>{language.name}</span>)
+
+
 
   function getCharIndex(letter) {
     const indexes = [];
@@ -19,7 +28,6 @@ export default function App() {
         indexes.push(i);
       }
     }
-    console.log(`Indexes for letter "${letter}":`, indexes);
     return indexes;
   }
 
@@ -67,7 +75,7 @@ export default function App() {
     }
     return obj;
   }
-  
+
   function updateDisplayedLetters(letter) {
     const indexes = getCharIndex(letter);
     console.log(indexes);
@@ -87,6 +95,13 @@ export default function App() {
 
   return (
     <>
+    <header>
+      <h1>Assembly: Endgame</h1>
+      <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
+    </header>
+      <div className="lifes">
+      {languagesEl}
+      </div>
       <section>
         {spanEl}
       </section>
