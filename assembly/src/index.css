@@ -5,10 +5,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-.hiddenletter {
-  width: 40px;
-  height: 40px;
-}
+
 span {
   display: inline-flex;
   width: 2.25em;
