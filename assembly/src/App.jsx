@@ -5,10 +5,12 @@ import { useState } from "react";
 import { languages } from "./languages.js";
 import clsx from 'clsx';
 
+// Function to choose a random word from the words array
 function chooseRandWord() {
   return words[Math.floor(Math.random() * words.length)];
 }
 
+// Function to generate letter objects with initial states
 function genratLetterObject() {
   return lettersArray.map(letter => ({
     value: letter,
@@ -17,6 +19,7 @@ function genratLetterObject() {
   }));
 }
 
+// Function to get the indexes of a letter in the word
 function getCharIndex(word, letter) {
   const indexes = [];
   for (let i = 0; i < word.length; i++) {
@@ -27,6 +30,7 @@ function getCharIndex(word, letter) {
   return indexes;
 }
 
+// Function to update the letter object based on the chosen letter
 function updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, lifes) {
   if (obj.value === letter) {
     if (word.includes(letter.toLowerCase())) {
@@ -52,6 +56,7 @@ export default function App() {
   const [displayedLetters, setDisplayedLetters] = useState(Array(word.length).fill(''));
   const [lifes, setLife] = useState(9);
 
+  // Generate language elements for displaying lives
   const languagesEl = languages.map((language, idx) => (
     <span
       key={language.name}
@@ -65,6 +70,7 @@ export default function App() {
     </span>
   ));
 
+  // Generate letter elements for displaying letters
   const LettersEl = letterObj.map(letter => (
     <Letters 
       key={letter.value} 
@@ -76,10 +82,12 @@ export default function App() {
     />
   ));
 
+  // Generate word elements for displaying the word
   const spanEl = displayedLetters.map((letter, index) => (
     <Word key={index} letter={letter} lifes={lifes} letterObj={letterObj} word={word}/>
   ));
 
+  // Function to check if the chosen letter is in the word
   function checkLeter(letter) {
     setLetterObj(prevLetterObj => {
       const updatedLetterObj = prevLetterObj.map(obj => updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, lifes));
@@ -87,10 +95,12 @@ export default function App() {
     });
   }
 
+  // Function to check if the game is won
   function gameWon() {
     return lifes > 0 && displayedLetters.join('').toLowerCase() === word;
   }
 
+  // Function to check if the game is over
   function gameOver() {
     if (lifes === 0) {
       const restOfLetters = word.split('').filter(x => !displayedLetters.includes(x));
@@ -100,6 +110,7 @@ export default function App() {
     return false;
   }
 
+  // Function to start a new game
   function startNewGame() {
     const newWord = chooseRandWord();
     setWord(newWord);
@@ -108,6 +119,7 @@ export default function App() {
     setLife(8);
   }
 
+  // Function to update the displayed letters based on the chosen letter
   function updateDisplayedLetters(letter) {
     const indexes = getCharIndex(word, letter);
     indexes.forEach(index => {
