@@ -16,13 +16,14 @@ header h1 {
 p {
   color: #8E8E8E;
 }
-.language{
+span.language{
   text-align: center;
   border-radius: 3px;
   display: inline-block;
   padding: 5px;
   text-align: center;
   font-weight: 700;
+  position: relative;
 }
 .lifes {
   display: flex;
@@ -69,6 +70,19 @@ button {
   align-items: center;
 
 }
+span.language.lost::before {
+  content: "💀";
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-size: 0.85rem;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
 .letters {
   display: flex;
   flex-wrap: wrap;
@@ -96,5 +110,13 @@ button {
   font-family: inherit;
 }
 button:disabled {
-  opacity: 0.2;
+  opacity: 0.5;
+}
+.gamewon {
+  background-color: #10A95B;
+  border-radius: 4px;
+  color: #F9F4DA;
+}
+.gamewon p {
+  color: #F9F4DA;
 }
