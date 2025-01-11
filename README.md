@@ -18,6 +18,10 @@ Assembly-Endgame is a word guessing game where you need to guess the word in und
 
 ![Game Start](images/start.png)
 
+### Game In Progress
+
+![Game In Progress](images/started.png)
+
 ### Game Won
 
 ![Game Won](images/game_win.png)
