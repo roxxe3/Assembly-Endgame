@@ -20,11 +20,11 @@ Assembly-Endgame is a word guessing game where you need to guess the word in und
 
 ### Game Won
 
-![Game Won](images/game_won.png)
+![Game Won](images/game_win.png)
 
 ### Game Over
 
-![Game Over](images/game_over.png)
+![Game Over](images/game_lost.png)
 
 ## Installation
 
