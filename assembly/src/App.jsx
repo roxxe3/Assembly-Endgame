@@ -4,6 +4,7 @@ import { words, lettersArray } from "./words.js";
 import { useState } from "react";
 import { languages } from "./languages.js";
 import clsx from 'clsx';
+import { getFarewellText } from "./utils.js";
 
 // Function to choose a random word from the words array
 function chooseRandWord() {
@@ -31,7 +32,7 @@ function getCharIndex(word, letter) {
 }
 
 // Function to update the letter object based on the chosen letter
-function updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, lifes) {
+function updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, lifes, setFarewellMessage) {
   if (obj.value === letter) {
     if (word.includes(letter.toLowerCase())) {
       updateDisplayedLetters(letter);
@@ -41,6 +42,10 @@ function updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, 
       };
     } else {
       setLife(lifes - 1);
+      if (lifes > 1 && lifes <= 9) {
+        const language = languages[8 - (lifes - 1)].name; // Get the language name based on the remaining lives
+        setFarewellMessage(getFarewellText(language));
+      }
       return {
         ...obj,
         isFalse: true
@@ -55,6 +60,7 @@ export default function App() {
   const [letterObj, setLetterObj] = useState(genratLetterObject());
   const [displayedLetters, setDisplayedLetters] = useState(Array(word.length).fill(''));
   const [lifes, setLife] = useState(9);
+  const [farewellMessage, setFarewellMessage] = useState('');
 
   // Generate language elements for displaying lives
   const languagesEl = languages.map((language, idx) => (
@@ -90,7 +96,7 @@ export default function App() {
   // Function to check if the chosen letter is in the word
   function checkLeter(letter) {
     setLetterObj(prevLetterObj => {
-      const updatedLetterObj = prevLetterObj.map(obj => updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, lifes));
+      const updatedLetterObj = prevLetterObj.map(obj => updateLetterObject(obj, letter, word, updateDisplayedLetters, setLife, lifes, setFarewellMessage));
       return updatedLetterObj;
     });
   }
@@ -116,7 +122,8 @@ export default function App() {
     setWord(newWord);
     setLetterObj(genratLetterObject());
     setDisplayedLetters(Array(newWord.length).fill(''));
-    setLife(8);
+    setLife(9);
+    setFarewellMessage('');
   }
 
   // Function to update the displayed letters based on the chosen letter
@@ -147,6 +154,10 @@ export default function App() {
             <h2>Game Over !</h2>
             <p>You lose! Better start learning Assembly 😭</p>
           </div>
+        }
+        { !gameOver() &&!gameWon() && farewellMessage && 
+        <div className="bye"><h2>{farewellMessage}</h2></div>
+
         }
       </header>
       <div className="lifes">
