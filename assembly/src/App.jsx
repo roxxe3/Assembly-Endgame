@@ -68,14 +68,18 @@ export default function App() {
     });
   }
   function gameOver(){
-      const restofLetters = word.map(x => {
+/*       const restofLetters = word.map(x => {
         if(!displayedLetters.includes(x)){
           return getCharIndex(x)
         }
       })
-      console.log(restofLetters)
-    
-    return lifes === 0 ? true : false
+      console.log(restofLetters) */
+  if (lifes === 0) {
+    const restOfLetters = word.split('').filter(x => !displayedLetters.includes(x));
+    restOfLetters.forEach(letter => updateDisplayedLetters(letter));
+    return true;
+  }
+  return false;
   }
 
   function startNewGame() {
