@@ -59,14 +59,14 @@ export default function App() {
   const [word, setWord] = useState(chooseRandWord());
   const [letterObj, setLetterObj] = useState(genratLetterObject());
   const [displayedLetters, setDisplayedLetters] = useState(Array(word.length).fill(''));
-  const [lifes, setLife] = useState(9);
+  const [lifes, setLife] = useState(8);
   const [farewellMessage, setFarewellMessage] = useState('');
 
   // Generate language elements for displaying lives
   const languagesEl = languages.map((language, idx) => (
     <span
       key={language.name}
-      className={clsx("language", { lost: lifes <= 8 - idx })}
+      className={clsx("language", { lost: lifes <= 7 - idx })}
       style={{
         backgroundColor: language.backgroundColor,
         color: language.color
