@@ -5,6 +5,6 @@ export default function Letters(props) {
     }
 
     return (
-          <button style={styles} onClick={props.chose}>{props.value}</button>
+          <button disabled={props.lifes === 0 ? true: false} style={styles} onClick={props.chose}>{props.value}</button>
       )
 }

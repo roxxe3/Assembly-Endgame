@@ -77,3 +77,23 @@ button {
   justify-content: center;
   
 }
+.gameover {
+  background-color: #BA2A2A;
+  border-radius: 4px;
+  color: #F9F4DA;
+  
+}
+.gameover p {
+  color: #F9F4DA;
+}
+.newgame {
+  color: #1E1E1E;
+  background-color: #11B5E5;
+  border: 1px solid #D7D7D7;
+  width: 230px;
+  font-weight: 700;
+  font-family: inherit;
+}
+button:disabled {
+  opacity: 0.2;
+}

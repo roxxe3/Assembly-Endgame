@@ -9,12 +9,23 @@ function chooseRandWord() {
 }
 
 
+function genratLetterObject() {
+  return lettersArray.map(letter => ({
+    value: letter,
+    isChosen: false,
+    isFalse: false
+  }));
+}
+
 
 
 export default function App() {
   const [word, setWord] = useState(chooseRandWord());
+  console.log(word);
   const [letterObj, setLetterObj] = useState(genratLetterObject());
   const [displayedLetters, setDisplayedLetters] = useState(Array(word.length).fill(''));
+  const [lifes, setLife] = useState(8)
+ 
   const languagesEl = languages.map(language => <span className="language" key={language.name} style={{backgroundColor: language.backgroundColor,
     color: language.color
   }}>{language.name}</span>)
@@ -31,15 +42,8 @@ export default function App() {
     return indexes;
   }
 
-  console.log(word);
 
-  function genratLetterObject() {
-    return lettersArray.map(letter => ({
-      value: letter,
-      isChosen: false,
-      isFalse: false
-    }));
-  }
+
 
   const LettersEl = letterObj.map(letter => (
     <Letters 
@@ -47,6 +51,7 @@ export default function App() {
       value={letter.value}
       isChosen={letter.isChosen}
       isFalse={letter.isFalse}
+      lifes={lifes}
       chose={() => checkLeter(letter.value)}
     />
   ));
@@ -54,8 +59,33 @@ export default function App() {
   function checkLeter(letter) {
     setLetterObj(prevLetterObj => {
       const updatedLetterObj = prevLetterObj.map(obj => updateLetterObject(obj, letter, word));
+      
+      if(lifes === 0) {
+        console.log("You lost")
+      }
+
       return updatedLetterObj;
     });
+  }
+  function gameOver(){
+      const restofLetters = word.map(x => {
+        if(!displayedLetters.includes(x)){
+          return getCharIndex(x)
+        }
+      })
+      console.log(restofLetters)
+    
+    return lifes === 0 ? true : false
+  }
+
+  function startNewGame() {
+    const newWord = chooseRandWord();
+    setWord(newWord);
+    setLetterObj(genratLetterObject());
+    setDisplayedLetters(Array(newWord.length).fill(''));
+    setLife(8);
+    console.log(newWord);
+    
   }
 
   function updateLetterObject(obj, letter, word) {
@@ -67,6 +97,8 @@ export default function App() {
           isChosen: true
         };
       } else {
+        setLife(lifes - 1)
+        console.log(lifes)
         return {
           ...obj,
           isFalse: true
@@ -78,7 +110,6 @@ export default function App() {
 
   function updateDisplayedLetters(letter) {
     const indexes = getCharIndex(letter);
-    console.log(indexes);
     indexes.forEach(index => {
       setDisplayedLetters(prevDisplayed => {
         const newDisplayed = [...prevDisplayed];
@@ -90,7 +121,7 @@ export default function App() {
 
 
   const spanEl = displayedLetters.map((letter, index) => (
-    <Word key={index} letter={letter} />
+    <Word key={index} letter={letter} lifes={lifes} letterObj={letterObj} word={word}/>
   ));
 
   return (
@@ -98,6 +129,11 @@ export default function App() {
     <header>
       <h1>Assembly: Endgame</h1>
       <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
+      {gameOver() && 
+      <div className="gameover">
+      <h2>Game Over !</h2>
+      <p>You lose! Better start learning Assembly 😭</p>
+      </div>}
     </header>
       <div className="lifes">
       {languagesEl}
@@ -108,6 +144,7 @@ export default function App() {
       <div className="letters">
         {LettersEl}
       </div>
+      {gameOver() && <button onClick={startNewGame} className="newgame">New Game</button>}
     </>
   );
 }
