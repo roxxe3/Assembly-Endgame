@@ -26,6 +26,13 @@ Assembly-Endgame is a word guessing game where you need to guess the word in und
 
 ![Game Over](images/game_lost.png)
 
+## Technologies Used
+
+- React
+- Vite
+- JavaScript
+- CSS
+
 ## Installation
 
 1. Clone the repository:
@@ -66,6 +73,3 @@ Assembly-Endgame is a word guessing game where you need to guess the word in und
 
 Contributions are welcome! Please open an issue or submit a pull request for any changes.
 
-## License
-
-This project is licensed under the MIT License.
