@@ -11,7 +11,7 @@ export function getFarewellText(language) {
         `Off into the sunset, ${language}`,
         `${language}, it's been real`,
         `${language}, your watch has ended`,
-        `${language} has left the building`
+        `${language} has left the building.`
     ];
 
     const randomIndex = Math.floor(Math.random() * options.length);
